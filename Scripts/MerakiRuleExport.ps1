@@ -1,5 +1,5 @@
 $apiKey = ""
-$path = ""
+$path = "" #File Path - e.g. C:\temp
 
 $orgID = Get-MerakiAPI -apiKey $apiKey -path "organizations"
 $networks = Get-MerakiAPI -apiKey $apiKey -path ("organizations/" + $orgID.id + "/networks") | Where-Object {$_.productTypes -contains "appliance"}
