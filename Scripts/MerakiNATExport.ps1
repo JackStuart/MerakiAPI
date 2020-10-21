@@ -13,6 +13,4 @@ foreach($network in $networks){
     $1ToMany | ConvertTo-Json | Out-File -FilePath "$($path)\$($network.name)-1ToMany.json"
     $1To1 | ConvertTo-Json | Out-File -FilePath "$($path)\$($network.name)-1To1.json"
     $PortForward | ConvertTo-Json | Out-File -FilePath "$($path)\$($network.name)-PortForward.json"
-
-    Start-Sleep -Seconds 20
 }
