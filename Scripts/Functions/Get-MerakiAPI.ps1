@@ -1,4 +1,5 @@
-﻿function Get-MerakiAPI {
+﻿#Requires -version 7.0
+function Get-MerakiAPI {
     <#
     .SYNOPSIS
         Connects to v1 of the Meraki API
@@ -49,6 +50,7 @@
 
     process {
         Write-Verbose "Connecting to Meraki API - $($uri)"
+        #StatusCodeVariable is used just because I dislike Powershells error handling for Invoke-RestMethod
         $response = Invoke-RestMethod -Method GET -Uri $uri -headers $headers -StatusCodeVariable scv -ResponseHeadersVariable responseheaders -SkipHttpErrorCheck
 
         if ($scv -eq 200) {
@@ -56,7 +58,7 @@
         }
         elseif ($scv -eq 400) {
             Write-Error "400 - Bad Request"
-            Write-Error $response.errors
+            $response.errors
         }
         elseif ($scv -eq 401) {
             $response = Write-Error "401 - Bad API Key"
